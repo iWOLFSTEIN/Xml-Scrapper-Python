@@ -29,18 +29,18 @@ class Spider:
 
         images = [img.text for img in entry.findall("images/img")]
 
-        images_str = ''
+        images_str = ""
         for i, m in enumerate(images):
-            breaker = '\n'
-            if (i == (len(images) - 1)):
-                breaker = ''
+            breaker = "\n"
+            if i == (len(images) - 1):
+                breaker = ""
             images_str = images_str + m + breaker
 
-        colors_str = ''
+        colors_str = ""
         for i, m in enumerate(colors):
-            breaker = '\n'
-            if (i == (len(colors) - 1)):
-                breaker = ''
+            breaker = "\n"
+            if i == (len(colors) - 1):
+                breaker = ""
             colors_str = colors_str + m + breaker
 
         writer.writerow(
@@ -87,17 +87,12 @@ class Spider:
                             "Condition",
                         ]
                     )
-                    # feed = feedparser.parse(self.url)
                     root = ET.fromstring(xml_data)
                     count = 0
 
-                    # for entry in feed.entries:
                     for entry in root.findall("./channel/item"):
                         self.extract_and_store_data(entry, writer)
                         count = count + 1
-                        # if count == 6:
-                        #     print(entry)
-                        #     break
 
                         print(f"Entry {count} is scrapped")
                     print(f"Total scrapped entries from this site are {count}")
